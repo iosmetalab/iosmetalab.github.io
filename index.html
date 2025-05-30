@@ -1,10 +1,94 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Hello World</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>iCloud Unlocker Simulator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #2c3e50, #3498db);
+      color: white;
+      text-align: center;
+      padding: 40px;
+    }
+    .container {
+      background-color: rgba(255,255,255,0.1);
+      padding: 30px;
+      border-radius: 12px;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+    input, button {
+      padding: 10px;
+      margin: 10px 0;
+      width: 90%;
+      border: none;
+      border-radius: 5px;
+    }
+    button {
+      background-color: #27ae60;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    #progress {
+      margin-top: 20px;
+      height: 25px;
+      background: #eee;
+      border-radius: 10px;
+      overflow: hidden;
+      display: none;
+    }
+    #bar {
+      height: 100%;
+      width: 0%;
+      background: #2ecc71;
+      transition: width 0.3s;
+    }
+    #status {
+      margin-top: 10px;
+    }
+  </style>
 </head>
 <body>
-    <h1>Hello, World!</h1>
-    <p>Sveikas atvykęs į mano GitHub puslapį!</p>
+  <h1>iCloud Unlocker Simulator</h1>
+  <div class="container">
+    <p>Enter iCloud Email to simulate unlock:</p>
+    <input type="email" id="email" placeholder="example@icloud.com" />
+    <button onclick="startUnlock()">Start Unlock</button>
+
+    <div id="progress">
+      <div id="bar"></div>
+    </div>
+    <p id="status"></p>
+  </div>
+
+  <script>
+    function startUnlock() {
+      const email = document.getElementById('email').value;
+      if (!email.includes("@")) {
+        alert("Please enter a valid iCloud email.");
+        return;
+      }
+
+      document.getElementById('progress').style.display = 'block';
+      let bar = document.getElementById('bar');
+      let status = document.getElementById('status');
+      let width = 0;
+      status.textContent = "Starting simulation...";
+      
+      let interval = setInterval(() => {
+        if (width >= 100) {
+          clearInterval(interval);
+          status.textContent = "✅ iCloud unlock simulation completed for " + email;
+        } else {
+          width += 5;
+          bar.style.width = width + "%";
+          status.textContent = "Unlocking... " + width + "%";
+        }
+      }, 200);
+    }
+  </script>
 </body>
 </html>
