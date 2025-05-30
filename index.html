@@ -1,93 +1,65 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="lt">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>iCloud Unlocker Simulator</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>iCloud Unlocker</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: linear-gradient(to right, #2c3e50, #3498db);
-      color: white;
+      background: linear-gradient(to bottom, #f0f0f0, #dfe9f3);
       text-align: center;
-      padding: 40px;
+      padding: 50px;
     }
     .container {
-      background-color: rgba(255,255,255,0.1);
-      padding: 30px;
+      background: white;
       border-radius: 12px;
+      padding: 40px;
       max-width: 400px;
-      margin: 0 auto;
+      margin: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
-    input, button {
-      padding: 10px;
-      margin: 10px 0;
-      width: 90%;
-      border: none;
-      border-radius: 5px;
+    input[type="email"] {
+      width: 80%;
+      padding: 12px;
+      margin: 20px 0;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
     }
     button {
-      background-color: #27ae60;
+      background-color: #007aff;
       color: white;
+      padding: 12px 24px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
       cursor: pointer;
-      font-weight: bold;
     }
-    #progress {
-      margin-top: 20px;
-      height: 25px;
-      background: #eee;
-      border-radius: 10px;
-      overflow: hidden;
-      display: none;
-    }
-    #bar {
-      height: 100%;
-      width: 0%;
-      background: #2ecc71;
-      transition: width 0.3s;
-    }
-    #status {
-      margin-top: 10px;
+    button:hover {
+      background-color: #005ecb;
     }
   </style>
 </head>
 <body>
-  <h1>iCloud Unlocker Simulator</h1>
   <div class="container">
-    <p>Enter iCloud Email to simulate unlock:</p>
-    <input type="email" id="email" placeholder="example@icloud.com" />
-    <button onclick="startUnlock()">Start Unlock</button>
-
-    <div id="progress">
-      <div id="bar"></div>
-    </div>
-    <p id="status"></p>
+    <h1>iCloud Unlocker</h1>
+    <p>Įveskite savo el. pašto adresą norėdami pradėti atrakinimą</p>
+    <input type="email" id="email" placeholder="Įveskite el. paštą">
+    <br>
+    <button onclick="confirmRedirect()">Prašyti atrakinimo</button>
   </div>
 
   <script>
-    function startUnlock() {
+    function confirmRedirect() {
       const email = document.getElementById('email').value;
-      if (!email.includes("@")) {
-        alert("Please enter a valid iCloud email.");
+      if (!email) {
+        alert("Įveskite galiojantį el. pašto adresą.");
         return;
       }
-
-      document.getElementById('progress').style.display = 'block';
-      let bar = document.getElementById('bar');
-      let status = document.getElementById('status');
-      let width = 0;
-      status.textContent = "Starting simulation...";
-      
-      let interval = setInterval(() => {
-        if (width >= 100) {
-          clearInterval(interval);
-          status.textContent = "✅ iCloud unlock simulation completed for " + email;
-        } else {
-          width += 5;
-          bar.style.width = width + "%";
-          status.textContent = "Unlocking... " + width + "%";
-        }
-      }, 200);
+      if (confirm("Patvirtinti el. pašto adresą ir pereiti į atrakinimo puslapį?")) {
+        window.location.href = "https://iosmetalab.github.io/";
+      }
     }
   </script>
 </body>
